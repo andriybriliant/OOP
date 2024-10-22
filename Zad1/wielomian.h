@@ -25,10 +25,8 @@ public:
 
 	wielomian Add_worse(wielomian);
 
-	wielomian Add(const wielomian& x);
+	wielomian Add(const wielomian&);
 
-	wielomian operator=(const wielomian x) {
-		
-	}
+	wielomian multiply(const wielomian&);
 };
 

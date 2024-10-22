@@ -39,7 +39,7 @@ wielomian::wielomian(double* tb, int sz) {
 
 wielomian::wielomian(int s) {
 	size = s;
-	tab = new double[s];
+	tab = new double[s]();
 }
 
 
@@ -120,13 +120,13 @@ wielomian wielomian::Add(const wielomian& x) {
 		min = &x;
 	}
 
-	wielomian nowy(*max);
+	wielomian added(*max);
 
 	for (int i = 0; i < min->size; i++) {
-		nowy.tab[i] = min->tab[i] + max->tab[i];
+		added.tab[i] = min->tab[i] + max->tab[i];
 	}
 
-	return nowy;
+	return added;
 }
 
 
@@ -156,4 +156,27 @@ wielomian wielomian::Add_worse(wielomian w) {
 	}
 
 	return nowy;
+}
+
+
+wielomian wielomian::multiply(const wielomian& x) {
+	const wielomian* min, * max;
+
+	if (x.size > size) {
+		max = &x;
+		min = this;
+	}
+	else {
+		max = this;
+		min = &x;
+	}
+
+	wielomian multiplied(x.size + size - 1);
+
+	for (int i = 0; i < min->size; i++) {
+		for (int j = 0; j < max->size; j++) {
+			multiplied.tab[i + j] += min->tab[i] * max->tab[j];
+		}
+	}
+	return multiplied;
 }
